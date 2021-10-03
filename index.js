@@ -29,9 +29,17 @@ const unhandledRejectionHandler = () => {
 
 if (!validateServerParams()) {
     
-    console.error(`${log.server.main} No host or port informed for environment ${process.env.CHAI4_ENV}`)
+    console.error(`${
+        log.server.main
+    } No host (${
+        process.env.CHAI4_HOST
+    }), or port (${
+        process.env.CHAI4_PORT
+    }) for environment ${
+        process.env.CHAI4_ENV
+    }`)
 
-    process.exit(-1)
+    process.exit(Number(process.env.CHAI4_TOO_DUMB_TO_PROCEED))
     
 }
 

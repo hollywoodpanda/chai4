@@ -55,10 +55,11 @@ export class ServerService {
         this.#server.route({
             method : 'GET',
             path : '/',
-            handler : (request, header) => {
+            handler : (request, h) => {
 
                 console.log(`${log.server.service} GET chai4 document route`)
 
+                // @TODO: Do something more useful... Like the whole shenanigans.
                 return 'Hello Chai4 World!'
 
              }

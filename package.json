@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "20.2.0",
-    "dotenv": "10.0.0"
+    "dotenv": "10.0.0",
+    "mime": "2.5.2"
   },
   "scripts": {
     "dev": "CHAI4_ENV=dev nodemon index.js",
