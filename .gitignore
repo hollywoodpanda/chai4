@@ -1,0 +1,5 @@
+node_modules
+yarn*
+package-*
+.env.prd
+.env.homolog

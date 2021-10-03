@@ -1,0 +1,26 @@
+{
+  "name": "chai4",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A file uploader and storage service",
+  "main": "index.js",
+  "repository": "https://github.com/hollywoodpanda/chai4.git",
+  "author": "Hollywoodpanda <hollywoodpanda@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "jest": "27.2.4",
+    "nodemon": "2.0.13"
+  },
+  "dependencies": {
+    "@hapi/hapi": "20.2.0",
+    "dotenv": "10.0.0"
+  },
+  "scripts": {
+    "dev": "CHAI4_ENV=dev nodemon index.js",
+    "qa": "CHAI4_ENV=qa node index.js",
+    "homolog": "CHAI4_ENV=homolog node index.js",
+    "prd": "CHAI4_ENV=prd NODE_ENV=production node index.js",
+    "foo": "CHAI4_ENV=foo node index.js"
+  }
+}
