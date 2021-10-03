@@ -55,7 +55,7 @@ export class ServerService {
         this.#server.route({
             method : 'GET',
             path : '/',
-            handler : (request, header) => {
+            handler : (request, h) => {
 
                 console.log(`${log.server.service} GET chai4 document route`)
 

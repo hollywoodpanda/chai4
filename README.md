@@ -40,15 +40,20 @@ classDiagram
 	<<interface>> Sizeable
 	Sizeable : +size()
 	
+	class MaxSizeable
+	<<interface>> MaxSizeable
+	MaxSizeable : +maxSize()
+	
 	class Volume
 	Volume : +String canonicalPath
-	Volume : +BigInteger maxSize
 	Volume: +size()
+	Volume: +maxSize()
 	Volume --|> Sizeable
+	Volume --|> MaxSizeable
 	
 	class Authorization
 	Authorization : +String documentName
-	Authorization : +String shelfName
+	Authorization : +BigInteger shelfId
 	Authorization : +Array<Account> accounts
 	Authorization : +isAuthorized(account)
     Authorization "*" --> "1" Document
@@ -59,19 +64,20 @@ classDiagram
 	User : +BigInteger id
 	class Account
 	Account : +String name
-	Account : ~User user
-	Account "1" <-- "1" User
+	Account : +Array<User> users
+	Account "1" <-- "*" User
 	
 	class Shelf
 	Shelf : +BigInteger id
 	Shelf : +String name
 	Shelf : ~Account account
 	Shelf : -Volume volume
-	Shelf : ~BigInteger maxSize
 	Shelf : +size()
+	Shelf : +maxSize()
 	Shelf "1" <-- "1" Account
 	Shelf "*" <-- "1" Volume
 	Shelf --|> Sizeable
+	Shelf --|> MaxSizeable
 	
 	class Document
 	Document : +String name <!-- A name must be exclusive inside a Shelf -->
