@@ -1,5 +1,7 @@
 'use strict'
 
+import { AccountDTO } from '../transfer/account-dto.js'
+
 export class AccountDVO extends AccountDTO {
     
     constructor (name = null, users = []) {

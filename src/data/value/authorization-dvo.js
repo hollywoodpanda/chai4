@@ -1,5 +1,7 @@
 'use strict'
 
+import { AuthorizationDTO } from "../transfer/authorization-dto.js"
+
 export class AuthorizationDVO extends AuthorizationDTO {
 
     constructor (

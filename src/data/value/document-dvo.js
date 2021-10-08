@@ -2,7 +2,7 @@
 
 import MIME from 'mime'
 
-import { DocumentDTO } from "../transfer/document-dto";
+import { DocumentDTO } from '../transfer/document-dto.js';
 
 export class DocumentDVO extends DocumentDTO {
 

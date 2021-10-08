@@ -1,5 +1,7 @@
 'use strict'
 
+import { UserDTO } from '../transfer/user-dto.js'
+
 export class UserDVO extends UserDTO {
 
     constructor (id = null) { // Defaulting to null if no id is provided

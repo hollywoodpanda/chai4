@@ -2,8 +2,11 @@
 
 
 export const log = {
+    main : '[main]',
     server : {
-        main : '[main]',
         service : '[server][service]'
+    },
+    service : {
+        file : '[service][file]'
     }
 }

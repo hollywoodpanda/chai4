@@ -1,5 +1,7 @@
 'use strict'
 
+import { VolumeDTO } from '../transfer/volume-dto.js'
+
 export class VolumeDVO extends VolumeDTO {
 
     constructor (

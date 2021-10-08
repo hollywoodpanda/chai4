@@ -1,6 +1,6 @@
 'use strict'
 
-import { ShelfDTO } from "../transfer/shelf-dto";
+import { ShelfDTO } from '../transfer/shelf-dto.js'
 
 export class ShelfDVO extends ShelfDTO {
 
