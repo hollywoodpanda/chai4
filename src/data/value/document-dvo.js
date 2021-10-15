@@ -20,6 +20,18 @@ export class DocumentDVO extends DocumentDTO {
         )
     }
 
+    get filename () {
+
+        return `${this.name}.${MIME.getExtension(this.mime)}`
+
+    }
+
+    get filepath () {
+
+        return `${this.path}/${this.filename}`
+
+    }
+
     static fromDTO (dto) {
 
         return new DocumentDVO(

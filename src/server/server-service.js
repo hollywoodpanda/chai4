@@ -1,6 +1,7 @@
 'use strict'
 
 import Hapi from '@hapi/hapi'
+import { PostDocumentRequestDTO } from '../data/transfer/request/post-document-request-dto.js'
 
 import { log } from '../util/constants.js'
 
@@ -57,12 +58,36 @@ export class ServerService {
             path : '/',
             handler : (request, h) => {
 
-                console.log(`${log.server.service} GET chai4 document route`)
+                console.log(`${log.server.service} GET / Chai4 document route`)
 
                 // @TODO: Do something more useful... Like the whole shenanigans.
-                return 'Hello Chai4 World!'
+                return 'Chai4 File Shelfilizer'
 
              }
+        })
+
+    }
+
+    #startPostDocumentRoute () {
+
+        this.#server.route({
+            method : 'POST',
+            path : '/',
+            handler : (request, h) => {
+
+                console.log(`${log.server.service} POST / Chai4 document route`)
+
+                const payload = request?.payload
+
+                if (payload?.path) {
+
+                    const requestDTO = new PostDocumentRequestDTO(payload.path)
+
+                    
+
+                }
+
+            }
         })
 
     }

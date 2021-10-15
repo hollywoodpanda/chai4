@@ -57,6 +57,12 @@ export class FileService {
 
         }
 
+        console.log(`${
+            log.service.file
+        } The account is authorized to save the document '${
+            document?.name
+        }'`)
+
         this.#fileEntityService.saveDocument(document, shelf)
 
     }

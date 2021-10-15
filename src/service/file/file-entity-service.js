@@ -5,6 +5,8 @@ import { DocumentDVO } from '../../data/value/document-dvo.js'
 import { EntityDVO } from '../../data/value/file/entity-dvo.js'
 import { ShelfDVO } from '../../data/value/shelf-dvo.js'
 
+import fs from 'fs/promises'
+
 export class FileEntityService {
 
     #main
@@ -30,7 +32,15 @@ export class FileEntityService {
      * @param {ShelfDVO} shelf
      */
     #replicate (document, shelf) {
-        throw new NotImplemented('FileEntityService.replicate(shelfedDocument)')
+        
+        const promises = []
+
+        for (let copy of this.#copies) {
+            promises.push(this.#save(document, shelf, copy))
+        }
+
+        return Promise.all(promises)
+
     }
 
     #startCopies () {
@@ -98,14 +108,46 @@ export class FileEntityService {
         }
     }
 
-    saveDocument (document, shelf) {
+    #pathExists (path) {
 
-        // @TODO: save in the main instance...
+        return fs.access(path, fs.constants.R_OK)
+
+    } 
+
+    /**
+     * 
+     * @param {DocumentDVO} document 
+     * @param {ShelfDVO} shelf 
+     */
+    async saveDocument (document, shelf) {
+
+        await this.#save(document, shelf, this.#main)
 
         // Replicating document to the copies...
-        // this.#replicate(the saved document in the shelf)
+        await this.#replicate(document, shelf)
 
-        throw new NotImplemented('FileEntityService.saveDocument(document, shelf)')
+    }
+
+    async #save (document, shelf, entity) {
+
+        const folder = `${entity.volume}/${shelf.name}`
+        //const tempFolder = `${entity.tempVolume}/${shelf.name}`
+
+        // @TODO: save in the main instance...
+        const folderExists = await this.#pathExists(folder)
+        //const tempFolderExists = await this.#pathExists(tempFolder)
+
+        if (!folderExists)
+            await fs.mkdir(folder)
+
+        //if (!tempFolderExists)
+        //    await fs.mkdir(tempFolder)
+
+        // Getting the file object
+        const documentFile = await fs.readFile(document?.filepath)
+
+        // Writing the file
+        await fs.writeFile(`${folder}/${document?.filename}`, documentFile)
 
     }
 
