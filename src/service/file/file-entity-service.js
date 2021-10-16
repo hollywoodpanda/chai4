@@ -6,6 +6,8 @@ import { EntityDVO } from '../../data/value/file/entity-dvo.js'
 import { ShelfDVO } from '../../data/value/shelf-dvo.js'
 
 import fs from 'fs/promises'
+import MIME from 'mime'
+import { log } from '../../util/constants.js'
 
 export class FileEntityService {
 
@@ -114,6 +116,12 @@ export class FileEntityService {
 
     } 
 
+    saveTemporaryDocument (file, shelf) {
+
+        return this.#saveTemporary(file, shelf, this.#main)
+
+    }
+
     /**
      * 
      * @param {DocumentDVO} document 
@@ -125,6 +133,54 @@ export class FileEntityService {
 
         // Replicating document to the copies...
         await this.#replicate(document, shelf)
+
+    }
+
+    async #saveTemporary (file, shelf, entity) {
+
+        const folder = `${entity.tempVolume}/${shelf.name}`
+
+        // @TODO: save in the main instance...
+        const folderExists = await this.#pathExists(folder)
+
+        if (!folderExists)
+            await fs.mkdir(folder)
+
+        const path = `${folder}/${file.hapi.filename}`
+
+        const stream = fs.createWriteStream(path)
+
+        return new Promise((resolve, reject) => {
+
+            file.on('error', err => {
+
+                console.error(`${log.service.file} Opsy! Error reading file (error) ${path}`, err)
+
+                reject(err)
+
+            })
+
+            file.pipe(stream)
+
+            file.on('end', err => {
+
+                if (err) {
+                    console.error(`${log.service.file} Opsy! Error reading file (end) ${path}`, err)
+                    reject(err)
+                }
+
+                const document = new DocumentDVO(file.hapi.filename, file.hapi.headers['content-type'], folder, shelf.id)
+
+                console.log(`${log.service.file} Temporary document saved %j`, document)
+
+                resolve(document)
+
+            })
+
+        })    
+
+        // Writing the file
+        await fs.writeFile(`${folder}/${document?.filename}`, file)
 
     }
 

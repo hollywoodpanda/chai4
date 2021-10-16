@@ -13,7 +13,7 @@ if (!MainValidator.validateEnvironment()) {
 dotenv.config({ path : `./.env.${process.env.CHAI4_ENV}` })
 
 
-import { ServerService } from './src/server/server-service.js'
+import { ChaiServer } from './src/server/chai-server.js'
 
 const unhandledRejectionHandler = () => {
 
@@ -44,6 +44,6 @@ if (!MainValidator.validateServerParams()) {
     
 }
 
-const server = new ServerService(process.env.CHAI4_HOST, process.env.CHAI4_PORT)
+const server = new ChaiServer(process.env.CHAI4_HOST, process.env.CHAI4_PORT)
 
 server.start()

@@ -8,5 +8,18 @@ export const log = {
     },
     service : {
         file : '[service][file]'
+    },
+    controller : {
+        file : '[controller][file]'
+    }
+}
+
+export const server = {
+    config : {
+        payload : {
+            maxBytes : 5242880,
+            parse : true,
+            output : 'file'
+        }
     }
 }

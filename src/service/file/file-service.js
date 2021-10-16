@@ -10,12 +10,37 @@ import { UserDVO } from '../../data/value/user-dvo.js'
 import { NotAuthorized } from '../../data/error/security/not-authorized.js'
 import { log } from '../../util/constants.js'
 
+import { v4 as uuidv4 } from 'uuid'
+
 export class FileService {
 
     #fileEntityService
 
     constructor () {
         this.#fileEntityService = new FileEntityService()
+    }
+
+    async saveTemporary (file) {
+
+        const originalName = file?.hapi?.filename
+
+        console.log(`${log.service.file} File original name is ${originalName}`)
+
+        const id = uuidv4()
+
+        const shelf = new ShelfDVO(
+            id,
+            `TEMP_${id}`
+        )
+
+        console.log(`${log.service.file} Shelf: %j`, shelf)
+
+        const document = await this.#fileEntityService.saveTemporaryDocument(file, shelf)
+
+        console.log(`${log.service.file} The created temporary document: %j`, document)
+
+        return document
+
     }
 
     /**

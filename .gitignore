@@ -3,3 +3,4 @@ yarn*
 package-*
 .env.prd
 .env.homolog
+nohup.out

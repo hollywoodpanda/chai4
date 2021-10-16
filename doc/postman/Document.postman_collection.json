@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "5ff6de7d-02a8-49d7-9556-d82dc66ebfd7",
+		"name": "Document",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a document by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082?bar=foo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"query": [
+						{
+							"key": "bar",
+							"value": "foo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add document to storage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Chai4-UserId",
+						"value": "123=5",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/home/hollywoodpanda/Accurate/Claro/sync/20211007.png"
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082"
+				}
+			},
+			"response": []
+		}
+	]
+}

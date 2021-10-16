@@ -2,6 +2,7 @@
 
 import { ShelfDTO } from '../shelf-dto.js'
 
+// @TODO: Should accept a base64 binary string or a path
 export class PostDocumentRequestDTO {
 
     #userId
@@ -12,7 +13,7 @@ export class PostDocumentRequestDTO {
 
     /**
      * 
-     * @param {String} path The file's full path to be saved in the Chai4 storage system 
+     * @param {String} path The file's path to be saved in the Chai4 storage system 
      * @param {String} shelfId The shelf where the document will be stored
      * @param {String} userId The caller's id (the identifier of the user calling the post document functionality)
      */
